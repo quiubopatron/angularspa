@@ -8,6 +8,8 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { HeroesComponent } from './components/heroes/heroes.component';
 import {APP_ROUTING} from './app.routes';
+import {HeroesService} from './services/heroes.service';
+import { InfoheroeComponent } from './components/infoheroe/infoheroe.component';
 
 // Rutas
 
@@ -19,13 +21,16 @@ import {APP_ROUTING} from './app.routes';
     NavbarComponent,
     HomeComponent,
     AboutComponent,
-    HeroesComponent
+    HeroesComponent,
+    InfoheroeComponent
   ],
   imports: [
     BrowserModule,
     APP_ROUTING
   ],
-  providers: [],
+  providers: [
+    HeroesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

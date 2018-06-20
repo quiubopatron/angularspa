@@ -1,3 +1,7 @@
+body{
+  padding-bottom: 8em ;
+}
+
 .animated {
   -webkit-animation-duration: 3s;
   animation-duration: 3s;

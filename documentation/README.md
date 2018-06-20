@@ -41,10 +41,10 @@ Creamso los componenetes home y navbar.
 
 >npm install bootstrap --save
 >npm install jquery --save
->npm install popper.js --save (popper libreria par ala ubicaci�nd e componentes)
+>npm install popper.js --save (popper libreria par ala ubicaci�nd e componentes)
 
 
-Lo instala dentro los modulos de la aplicaci�n. Despu�s es necesario configurar desde **angular.json**. Inconveniente de este sistema, se
+Lo instala dentro los modulos de la aplicaci�n. Despu�s es necesario configurar desde **angular.json**. Inconveniente de este sistema, se
 
 ```xml
             "styles": [
@@ -87,10 +87,10 @@ export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES, {useHash: true} );
 
 
 
-Despues hay que a�adir APP_ROUTING
+Despues hay que a�adir APP_ROUTING
  en app.module.ts
  
->Si se van a utilizar rutas con hash, hay que a�adir usehash:true:
+>Si se van a utilizar rutas con hash, hay que a�adir usehash:true:
 
 >export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES, {useHash: true} ); 
 
@@ -109,7 +109,7 @@ Finalmente en app.component.html hay que poner router-outlet:
 ### 49. RouterLink y RouterLinkActive
 
 
-RouterLink, si se quiere una ruta m�s larga en el array s eponen m�s items:
+RouterLink, si se quiere una ruta m�s larga en el array s eponen m�s items:
 
 ```xml
         <a class="nav-link" [routerLink] = "['home']">Home <span class="sr-only">(current)</span></a>
@@ -132,7 +132,145 @@ RouterLinkActive, para resaltar la clase:
       </li>
 ```
 
+### 50. Componente heroe. Diseño
 
+### 51. Introduccion a los servicios
+
+### 52 Primer servicio
+
+Se crea un servicio components/services/heroes.service.ts.
+
+```xml
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class HeroesService {
+
+ constructor() {
+   console.log('Servicio listo para usarse');
+ }
+}
+```
+
+Se añade a app.module.ts en providers el servicio.
+
+```xml
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class HeroesService {
+
+  private heroes: any =
+  [
+    {
+      nombre: 'Aquaman',
+      bio: 'El poder más reconocido de Aquaman es la capacidad telepática para comunicarse con la vida marina, la cual puede convocar a grandes distancias.',
+      img: 'assets/img/aquaman.png',
+      aparicion: '1941-11-01',
+      casa: 'DC'
+    },
+{
+  nombre: 'Batman',
+  bio: 'Los rasgos principales de Batman se resumen en «destreza física, habilidades deductivas y obsesión». La mayor parte de las características básicas de los cómics han variado por las diferentes interpretaciones que le han dado al personaje.',
+  img: 'assets/img/batman.png',
+  aparicion: '1939-05-01',
+  casa: 'DC'
+},
+{
+  nombre: 'Daredevil',
+    bio: 'Al haber perdido la vista, los cuatro sentidos restantes de Daredevil fueron aumentados por la radiación a niveles superhumanos, en el accidente que tuvo cuando era niño. A pesar de su ceguera, puede \'ver\' a través de un \'sexto sentido\' que le sirve como un radar similar al de los murciélagos.',
+  img: 'assets/img/daredevil.png',
+  aparicion: '1964-01-01',
+  casa: 'Marvel'
+},
+{
+  nombre: 'Hulk',
+    bio: 'Su principal poder es su capacidad de aumentar su' +
+    ' fuerza hasta niveles prácticamente ilimitados a la vez que aumenta su' +
+    ' furia. Dependiendo de qué personalidad de Hulk esté al mando en' +
+    ' ese momento (el Hulk Banner es el más débil, pero lo compensa con su inteligencia).',
+  img: 'assets/img/hulk.png',
+  aparicion: '1962-05-01',
+  casa: 'Marvel'
+},
+{
+  nombre: 'Linterna Verde',
+    bio: 'Poseedor del anillo de poder que posee la capacidad de crear manifestaciones de luz sólida mediante la utilización del pensamiento. Es alimentado por la Llama Verde (revisada por escritores posteriores como un poder místico llamado Starheart), una llama mágica contenida en dentro de un orbe (el orbe era en realidad un meteorito verde de metal que cayó a la Tierra, el cual encontró un fabricante de lámparas llamado Chang)',
+  img: 'assets/img/linterna-verde.png',
+  aparicion: '1940-06-01',
+  casa: 'DC'
+},
+{
+  nombre: 'Spider-Man',
+  bio: 'Tras ser mordido por una araña radiactiva, obtuvo los siguientes poderes sobrehumanos, una gran fuerza, agilidad, poder trepar por paredes. La fuerza de Spider-Man le permite levantar 10 toneladas o más. Gracias a esta gran fuerza Spider-Man puede realizar saltos íncreibles. Un \'sentido arácnido\', que le permite saber si un peligro se cierne sobre él, antes de que suceda. En ocasiones este puede llevar a Spider-Man al origen del peligro.',
+  img: 'assets/img/spiderman.png',
+  aparicion: '1962-08-01',
+  casa: 'Marvel'
+},
+{
+  nombre: 'Wolverine',
+  bio: 'En el universo ficticio de Marvel, Wolverine posee poderes regenerativos que pueden curar cualquier herida, por mortal que ésta sea, además ese mismo poder hace que sea inmune a cualquier enfermedad existente en la Tierra y algunas extraterrestres . Posee también una fuerza sobrehumana, que si bien no se compara con la de otros superhéroes como Hulk, sí sobrepasa la de cualquier humano.',
+  img: 'assets/img/wolverine.png',
+  aparicion: '1974-11-01',
+  casa: 'Marvel'
+}
+];
+
+constructor() {
+   console.log('Servicio listo para usarse');
+ }
+ getHeroes(): any {
+  return this.heroes;
+ }
+}
+
+```
+
+
+> ngOnInit() se ejecuta una vez renderizada la página, después del constructor
+
+```xml
+import { Component, OnInit } from '@angular/core';
+import {Heroe, HeroesService} from '../../services/heroes.service';
+
+@Component({
+  selector: 'app-heroes',
+  templateUrl: './heroes.component.html',
+  styles: []
+})
+export class HeroesComponent implements OnInit {
+
+  heroes: Heroe[] = [];
+
+  constructor(private _heroesService: HeroesService) {
+
+  }
+
+  ngOnInit() {
+
+    this.heroes = this._heroesService.getHeroes();
+
+    console.log(this.heroes);
+  }
+
+}
+
+
+```
+
+### 53. Pagina de heroes -Diseño con *ngFor
+
+### 54 Rutas por parametros. Router y activatedRoute
+
+En el archivo app.module.ts creamos una nueva ruta:
+
+>  { path: 'infoheroe/:id', component: InfoheroeComponent },
+
+ponemos un parámetro con /:nombreparametro
+
+Desde el html:
+
+>  <a [routerLink]="['/infoheroe', i ]" href="#" class="btn btn-outline-primary"> Leer mas...</a>
 
 
 
