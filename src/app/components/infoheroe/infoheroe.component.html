@@ -1,10 +1,12 @@
 <div class="card">
   <img class="card-img-top animated fadeIn" src="{{heroe.img}}" alt="Card image cap">
   <div class="card-body">
-    <h5 class="card-title">{{heroe.nombre}}</h5>
+    <h5 class="card-title">{{heroe.nombre | uppercase}}</h5>
     <p class="card-text">{{heroe.bio}}</p>
-    <p class="card-text">{{heroe.casa}}</p>
-    <p class="card-text"><small class="text-muted">{{heroe.aparicion}}</small></p>
+    <img src="{{urlCompany}}" alt="marvel" class="img-fluid img-responsive">
+    <p class="card-text"><small class="text-muted">{{heroe.aparicion | date: 'y'}}</small></p>
+
+    <a [routerLink] = "['/heroes']" href="#" class="btn btn-outline-danger">Volver</a>
 
     <!--<a [routerLink]="['/infoheroe', i ]" href="#" class="btn btn-outline-primary"> Leer mas...</a>-->
 

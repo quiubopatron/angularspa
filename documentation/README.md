@@ -311,3 +311,20 @@ export class InfoheroeComponent implements OnInit {
   }
 ```
 
+### 58. Transformacion visual de la data. Pipe.
+
+**currency**
+**date**
+**upercase**
+**json**
+**limitTo**  
+**lowercase**  
+**async**
+**decimal**
+**percent**  
+
+ejemplo:  
+
+>    <p class="card-text"><small class="text-muted">{{heroe.aparicion | date: 'y'}}</small></p>
+
+

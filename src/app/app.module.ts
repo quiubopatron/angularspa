@@ -10,6 +10,7 @@ import { HeroesComponent } from './components/heroes/heroes.component';
 import {APP_ROUTING} from './app.routes';
 import {HeroesService} from './services/heroes.service';
 import { InfoheroeComponent } from './components/infoheroe/infoheroe.component';
+import { BuscadorComponent } from './components/buscador/buscador.component';
 
 // Rutas
 
@@ -22,7 +23,8 @@ import { InfoheroeComponent } from './components/infoheroe/infoheroe.component';
     HomeComponent,
     AboutComponent,
     HeroesComponent,
-    InfoheroeComponent
+    InfoheroeComponent,
+    BuscadorComponent
   ],
   imports: [
     BrowserModule,
