@@ -7,6 +7,7 @@
     <p class="card-text">{{heroe.bio}}</p>
     <p class="card-text">{{heroe.casa}}</p>
     <p class="card-text"><small class="text-muted">{{heroe.aparicion}}</small></p>
+
     <button (click)="verHeroe(i)" type="button" class="btn btn-outline-primary btn-block">Ver mas</button>
 
   <a [routerLink]="['/infoheroe', i ]" href="#" class="btn btn-outline-primary"> Leer mas...</a>

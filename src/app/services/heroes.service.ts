@@ -64,6 +64,9 @@ constructor() {
  getHeroes(): Heroe [] {
   return this.heroes;
  }
+ getHeroe(i: string): Heroe {
+  return this.heroes[i];
+ }
 }
 
 export interface Heroe {

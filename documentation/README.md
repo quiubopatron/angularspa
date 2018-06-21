@@ -270,7 +270,44 @@ ponemos un parámetro con /:nombreparametro
 
 Desde el html:
 
->  <a [routerLink]="['/infoheroe', i ]" href="#" class="btn btn-outline-primary"> Leer mas...</a>
+>  <a [routerLink]="['/infoheroe', i ]" href="#" class="btn btn-> outline-primary"> Leer mas...</a>
+
+Mediante código de programación:
+
+Creamos una funcion y la llamamos desde el html:
+
+>    <button (click)="verHeroe(i)" type="button" class="btn btn-outline-primary btn-block">Ver mas</button>
+
+en el archivo typescript:
+
+>  verHeroe(i: number) {
+> 
+>     this._router.navigate(['/infoheroe', i]);
+>   }
 
 
+### 55. Recibiendo parametros por URL ActivatedRoute
+
+```xml
+import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+
+@Component({
+  selector: 'app-infoheroe',
+  templateUrl: './infoheroe.component.html',
+  styleUrls: ['./infoheroe.component.css']
+})
+export class InfoheroeComponent implements OnInit {
+
+  constructor(private _activatedRoute: ActivatedRoute) {
+
+    this._activatedRoute.params.subscribe(params => console.log(params['id']) );
+  }
+
+  ngOnInit() {
+  }
+
+}
+  }
+```
 
