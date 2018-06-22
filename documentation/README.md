@@ -269,8 +269,10 @@ En el archivo app.module.ts creamos una nueva ruta:
 ponemos un parámetro con /:nombreparametro
 
 Desde el html:
+```xml
+ <a [routerLink]="['/infoheroe', i ]" href="#" class="btn btn-> outline-primary"> Leer mas...</a>```
 
->  <a [routerLink]="['/infoheroe', i ]" href="#" class="btn btn-> outline-primary"> Leer mas...</a>
+
 
 Mediante código de programación:
 
@@ -332,3 +334,177 @@ ejemplo:
 
 ### 62 Mostrando un mensaje cuando no hay resultados.
 
+### 63. Recibir información de un componente padre a un hijo
+
+
+La idea es crear un componente independiente, en el caso concreto una tarjeta.
+
+Para ello se pueden enviar al hijo una serie de parametros desde el html heroe-tarjeta.component.html:
+
+```xml
+<div class="card">
+  <img class="card-img-top animated fadeIn" src="{{heroe.img}}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{heroe.nombre}}</h5>
+    <p class="card-text">{{heroe.bio}}</p>
+    <p class="card-text">{{heroe.casa}}</p>
+    <p class="card-text"><small class="text-muted">{{heroe.aparicion}}</small></p>
+
+    <button (click)="verHeroe()" type="button" class="btn btn-outline-primary btn-block">Ver mas</button>
+
+    <a [routerLink]="['/infoheroe', index ]" href="#" class="btn btn-outline-primary"> Leer mas...</a>
+
+  </div>
+</div>
+<div>{{prueba}}</div>
+```
+
+Desde el ts del componente:
+
+```xml
+import {Component, Input, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+
+@Component({
+  selector: 'app-heroe-tarjeta',
+  templateUrl: './heroe-tarjeta.component.html',
+  styleUrls: ['./heroe-tarjeta.component.css']
+})
+export class HeroeTarjetaComponent implements OnInit {
+  @Input()
+  heroe: any  = {};
+
+  @Input()
+  index: number;
+
+  @Input()
+  prueba: string;
+
+  constructor(private _router: Router) { }
+
+  ngOnInit() {
+  }
+
+  verHeroe() {
+      console.log(this.index);
+    this._router.navigate(['/infoheroe', this.index]);
+
+  }
+}
+```
+
+y ahora desde donde se quiera utilizar bastará :
+
+```xml
+<h1>Heroes<small>MArvel y DC</small></h1>
+<div class="card-columns">
+  <!--*ngFor="let heroe of heroes; let i = index"-->
+<!--<div class="card" *ngFor="let heroe of heroes; let i = index">-->
+  <!--<img class="card-img-top animated fadeIn" src="{{heroe.img}}" alt="Card image cap">-->
+  <!--<div class="card-body">-->
+    <!--<h5 class="card-title">{{heroe.nombre}}</h5>-->
+    <!--<p class="card-text">{{heroe.bio}}</p>-->
+    <!--<p class="card-text">{{heroe.casa}}</p>-->
+    <!--<p class="card-text"><small class="text-muted">{{heroe.aparicion}}</small></p>-->
+
+    <!--<button (click)="verHeroe(i)" type="button" class="btn btn-outline-primary btn-block">Ver mas</button>-->
+
+  <!--<a [routerLink]="['/infoheroe', i ]" href="#" class="btn btn-outline-primary"> Leer mas...</a>-->
+
+  <!--</div>-->
+  <app-heroe-tarjeta [prueba]="prueba" [heroe]='foo' [index]="i" *ngFor="let foo of heroes; let i = index"></app-heroe-tarjeta>
+</div>
+``` 
+
+> Axel comenta que se puede pasar directamente el componente padre poniéndolo en el constructor, se accede así al valor d elas variabels del padre y a sus metodos.
+
+### 64. @Output
+
+
+Se crea un evento desde el hijo que es capturado por el padre y ejecuta el metodo un método:
+
+```xml
+  @Output()
+  heroeSeleccionado: EventEmitter<number>
+```
+
+number es el tipo de valor que va a emitir.
+
+```xml
+  verHeroe() {
+    //   console.log(this.index);
+    // this._router.navigate(['/infoheroe', this.index]);
+
+    this.heroeSeleccionado.emit(this.index);
+
+  }
+```
+
+Codigo:
+
+```xml
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Router} from '@angular/router';
+
+@Component({
+  selector: 'app-heroe-tarjeta',
+  templateUrl: './heroe-tarjeta.component.html',
+  styleUrls: ['./heroe-tarjeta.component.css']
+})
+export class HeroeTarjetaComponent implements OnInit {
+  @Input()
+  heroe: any  = {};
+
+  @Input()
+  index: number;
+
+  @Input()
+  prueba: string;
+
+  @Output()
+  heroeSeleccionado: EventEmitter<number>;
+
+
+
+  constructor(private _router: Router) {
+    this.heroeSeleccionado = new EventEmitter<number>();
+  }
+
+  ngOnInit() {
+  }
+
+  verHeroe() {
+    //   console.log(this.index);
+    // this._router.navigate(['/infoheroe', this.index]);
+
+    this.heroeSeleccionado.emit(this.index);
+
+  }
+}
+```
+
+```xml
+<h1>Heroes<small>MArvel y DC</small></h1>
+<div class="card-columns">
+  <!--*ngFor="let heroe of heroes; let i = index"-->
+<!--<div class="card" *ngFor="let heroe of heroes; let i = index">-->
+  <!--<img class="card-img-top animated fadeIn" src="{{heroe.img}}" alt="Card image cap">-->
+  <!--<div class="card-body">-->
+    <!--<h5 class="card-title">{{heroe.nombre}}</h5>-->
+    <!--<p class="card-text">{{heroe.bio}}</p>-->
+    <!--<p class="card-text">{{heroe.casa}}</p>-->
+    <!--<p class="card-text"><small class="text-muted">{{heroe.aparicion}}</small></p>-->
+
+    <!--<button (click)="verHeroe(i)" type="button" class="btn btn-outline-primary btn-block">Ver mas</button>-->
+
+  <!--<a [routerLink]="['/infoheroe', i ]" href="#" class="btn btn-outline-primary"> Leer mas...</a>-->
+
+  <!--</div>-->
+  <app-heroe-tarjeta (heroeSeleccionado)="verHeroe($event)" [prueba]="prueba" [heroe]='foo' [index]="i" *ngFor="let foo of heroes; let i = index"></app-heroe-tarjeta>
+</div>
+```
+
+
+
+
+Con EventTemitter

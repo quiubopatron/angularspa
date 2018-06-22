@@ -3,20 +3,21 @@
 <h2>Buscando a: {{termino}}</h2>
 <!--<div *ngIf="heroes.length != 0">-->
 <div class="card-columns">
-  <div class="card" *ngFor="let heroe of heroes; let i = index">
-    <img class="card-img-top animated fadeIn" src="{{heroe.img}}" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">{{heroe.nombre}}</h5>
-      <p class="card-text">{{heroe.bio}}</p>
-      <p class="card-text">{{heroe.casa}}</p>
-      <p class="card-text"><small class="text-muted">{{heroe.aparicion}}</small></p>
+  <!--<div class="card" *ngFor="let heroe of heroes; let i = index">-->
+    <!--<img class="card-img-top animated fadeIn" src="{{heroe.img}}" alt="Card image cap">-->
+    <!--<div class="card-body">-->
+      <!--<h5 class="card-title">{{heroe.nombre}}</h5>-->
+      <!--<p class="card-text">{{heroe.bio}}</p>-->
+      <!--<p class="card-text">{{heroe.casa}}</p>-->
+      <!--<p class="card-text"><small class="text-muted">{{heroe.aparicion}}</small></p>-->
 
-      <!--<button (click)="verHeroe(i)" type="button" class="btn btn-outline-primary btn-block">Ver mas</button>-->
+      <!--&lt;!&ndash;<button (click)="verHeroe(i)" type="button" class="btn btn-outline-primary btn-block">Ver mas</button>&ndash;&gt;-->
 
-      <a [routerLink]="['/infoheroe', i ]" href="#" class="btn btn-outline-primary"> Leer mas...</a>
+      <!--<a [routerLink]="['/infoheroe', i ]" href="#" class="btn btn-outline-primary"> Leer mas...</a>-->
 
-    </div>
-  </div>
+    <!--</div>-->
+  <!--</div>-->
+  <app-heroe-tarjeta [heroe] = heroe [index] ="i" *ngFor="let heroe of heroes; let i = index"></app-heroe-tarjeta>
 </div>
 <!--</div>-->
 <div *ngIf="heroes.length == 0" class="container" role="alert">No se han encontrado heroes con el término de  búsqueda {{termino}}</div>

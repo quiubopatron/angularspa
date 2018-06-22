@@ -11,6 +11,7 @@ import {APP_ROUTING} from './app.routes';
 import {HeroesService} from './services/heroes.service';
 import { InfoheroeComponent } from './components/infoheroe/infoheroe.component';
 import { BuscadorComponent } from './components/buscador/buscador.component';
+import { HeroeTarjetaComponent } from './components/heroe-tarjeta/heroe-tarjeta.component';
 
 // Rutas
 
@@ -24,7 +25,8 @@ import { BuscadorComponent } from './components/buscador/buscador.component';
     AboutComponent,
     HeroesComponent,
     InfoheroeComponent,
-    BuscadorComponent
+    BuscadorComponent,
+    HeroeTarjetaComponent
   ],
   imports: [
     BrowserModule,

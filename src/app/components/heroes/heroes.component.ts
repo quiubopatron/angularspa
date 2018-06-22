@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 export class HeroesComponent implements OnInit {
 
   heroes: Heroe[] = [];
+  prueba: string = 'ueppp';
 
   constructor(private _heroesService: HeroesService, private _router: Router) {
 

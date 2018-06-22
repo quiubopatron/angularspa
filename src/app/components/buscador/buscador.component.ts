@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {HeroesService} from '../../services/heroes.service';
+import {Heroe, HeroesService} from '../../services/heroes.service';
 
 @Component({
   selector: 'app-buscador',
