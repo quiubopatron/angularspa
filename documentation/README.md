@@ -328,3 +328,7 @@ ejemplo:
 >    <p class="card-text"><small class="text-muted">{{heroe.aparicion | date: 'y'}}</small></p>
 
 
+### 59,60,61 Buscador de heroes
+
+### 62 Mostrando un mensaje cuando no hay resultados.
+
